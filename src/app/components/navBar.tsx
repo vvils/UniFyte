@@ -46,7 +46,7 @@ export default function NavBar(){
               </Button>
             </DropdownTrigger>
             <DropdownMenu aria-label="Static Actions">
-              <DropdownItem key="edit">Settings</DropdownItem>
+              <DropdownItem key="edit">Edit Profile</DropdownItem>
               <DropdownItem key="Log out" className="text-danger" color="danger">
                 Logout
               </DropdownItem>
