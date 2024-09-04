@@ -1,15 +1,18 @@
-import React from "react";
+import React, {useState} from "react";
 import Link from 'next/link'
 import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button} from "@nextui-org/react";
 
 export default function NavBar(){
+    // const [activeButton, setActiveButton] = useState('')
     return(
         <nav>
             <div className="max-w-screen-xl px-4 py-3 mx-auto border-b-2 flex items-center justify-between">
                 <div>
                     <ul className="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
                         <li>
-                            <Link href="/" className="hover:underline text-xl">Home</Link>
+                            <Link href="/" className="hover:underline text-xl">
+                                <img src="/unifyte_logo.png"></img>
+                            </Link>
                         </li>
                         <li>
                             <Link href="/start-a-petition" className="hover:underline text-xl" aria-current="page">Start Petition</Link>
@@ -31,7 +34,6 @@ export default function NavBar(){
                     <Profile/>
                 </div>
             </div>
-
         </nav>
     )
 

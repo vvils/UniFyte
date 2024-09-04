@@ -5,6 +5,8 @@ import NavBar from '../components/navBar'
 export default function PetitionPage(){
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
     const [activeButton, setActiveButton] = useState(false)
+    const [selectedOption, setSelectedOption] = useState('')
+
     const [text, setText] = useState('')
     const [title, setTitle] = useState('')
     
@@ -14,6 +16,10 @@ export default function PetitionPage(){
 
     const decrementCounter = () =>{
         setCurrentQuestionIndex(currentQuestionIndex - 1)
+    }
+
+    const highlightButton = () => {
+        setSelectedOption(prev => prev === '' ? 'border-orange-400' : '')
     }
 
     // const handle
@@ -39,7 +45,7 @@ export default function PetitionPage(){
                     {currentQuestionIndex === 1 && (
                         <div>
                             <h1 className='md:font-bold text-5xl'>How would you like to write your petition</h1>
-                            <button className='text-2xl mt-12 ml-52 p-8 border-2 rounded-xl'>Create Your Petition from Stratch</button>
+                            <button className={`text-2xl mt-12 ml-52 p-8 border-2 rounded-xl ${selectedOption}`} onClick={highlightButton}>Create Your Petition from Stratch</button>
                         </div>
                     )}
                     
@@ -66,8 +72,8 @@ export default function PetitionPage(){
                     {currentQuestionIndex === 5 && (
                         <div>
                             <h1 className='md:font-bold text-5xl'>Your petition is ready to make a difference</h1>
-                            <button>Preview Petition</button>
-                            <button>Create Petition</button>
+                            <button className="text-2xl mt-12 ml-52 p-8 border-2 rounded-xl">Preview Petition</button>
+                            <button className="text-2xl mt-12 ml-52 p-8 border-2 rounded-xl">Create Petition</button>
                         </div>
                     )}
                     
@@ -77,9 +83,7 @@ export default function PetitionPage(){
                         disabled = {activeButton} onClick={() => {incrementCounter()}}> Continue</button>
                     </div>
                 </div>
-                
             </div>
-            
         </main>
     )
 }
