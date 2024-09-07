@@ -70,7 +70,7 @@ export default function NavBar() {
           <Button variant="bordered">Profile</Button>
         </DropdownTrigger>
         <DropdownMenu aria-label="Static Actions">
-          <DropdownItem key="edit">Edit Profile</DropdownItem>
+          <DropdownItem href= "/profile" key="edit">Edit Profile</DropdownItem>
           <DropdownItem key="Log out" className="text-danger" color="danger">
             Logout
           </DropdownItem>
