@@ -1,22 +1,34 @@
 "use client";
 import { useState, useEffect } from "react";
 import NavBar from "../../components/navBar";
+import Tiptap from "@/components/textEditor";
 
 export default function PetitionPage() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [activeButton, setActiveButton] = useState(false);
-  const [text, setText] = useState("");
-  const [title, setTitle] = useState("");
+  
+  const [text, setText] = useState<string>("");
+  const [title, setTitle] = useState<string>("");
 
   const incrementCounter = () => {
     setCurrentQuestionIndex(currentQuestionIndex + 1);
   };
 
   const decrementCounter = () => {
-    setCurrentQuestionIndex(currentQuestionIndex - 1);
+    if(currentQuestionIndex > 0){
+      setCurrentQuestionIndex(currentQuestionIndex - 1);
+    }
   };
 
-  // const handle
+  const handleSubmit = (e:any) => {
+    e.preventDefault()
+    const data = {
+      title: title
+    }
+
+    console.log(`The petition data was submitted ${data}`)
+    
+  }
 
   return (
     <main className="min-h-screen justify-between p-4">
@@ -28,9 +40,6 @@ export default function PetitionPage() {
                 What University do you go to?
               </h1>
               <h1 className="text-2xl mt-8">Connect with people near you</h1>
-              {/* <div className="border-2 text-2xl p-2 w-96 rounded-xl mt-12">
-                            Enter a University
-                        </div> */}
               <input
                 type="text"
                 placeholder="Enter a University"
@@ -42,7 +51,7 @@ export default function PetitionPage() {
           {currentQuestionIndex === 1 && (
             <div>
               <h1 className="md:font-bold text-5xl">
-                How would you like to write your petition
+                How would you like to write your petition?
               </h1>
               <button className="text-2xl mt-12 ml-52 p-8 border-2 rounded-xl">
                 Create Your Petition from Stratch
@@ -59,6 +68,8 @@ export default function PetitionPage() {
                 type="text"
                 placeholder="Enter your title"
                 className="mt-8 w-full p-2 rounded-md border-2"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
               />
             </div>
           )}
@@ -68,7 +79,11 @@ export default function PetitionPage() {
               <h1 className="md:font-bold text-5xl">
                 Write are you writing about?
               </h1>
-              {/* <textPrompt/> */}
+              <h1 className="items-center text-3xl">
+                Start from scratch
+              </h1>
+              <Tiptap
+               content={text}/>
             </div>
           )}
 
@@ -83,8 +98,8 @@ export default function PetitionPage() {
               <h1 className="md:font-bold text-5xl">
                 Your petition is ready to make a difference
               </h1>
-              <button>Preview Petition</button>
-              <button>Create Petition</button>
+              {/* <button>Preview Petition</button> */}
+              <button className="border-2 rounded-xl mt-12 text-xl p-4" onClick={handleSubmit}>Create Petition</button>
             </div>
           )}
 
@@ -113,8 +128,4 @@ export default function PetitionPage() {
       </div>
     </main>
   );
-}
-
-function textPrompt() {
-  return <div>Hello</div>;
 }
