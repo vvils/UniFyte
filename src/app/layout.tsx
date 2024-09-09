@@ -3,8 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import NavBar from "../components/navBar";
 
-import { UserProvider } from '@auth0/nextjs-auth0/client';
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -19,16 +17,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <UserProvider>
-        <body className={inter.className}>
-          <div className="w-screen h-screen">
-            <div className="h-20">
-              <NavBar />
-            </div>
-            <div className="h-[calc(100vh-5rem)]">{children}</div>
-          </div>  
-        </body>
-      </UserProvider>
+      <body className={inter.className}>
+        <div className="w-screen h-screen">
+          <div className="h-20">
+            <NavBar />
+          </div>
+          <div className="h-[calc(100vh-5rem)]">{children}</div>
+        </div>
+      </body>
     </html>
   );
 }
