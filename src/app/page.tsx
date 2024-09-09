@@ -25,9 +25,6 @@ export default function HomePage() {
 
   return (
     <main className="h-full">
-      <div>
-        <a href="/api/auth/login">Login</a>
-      </div>
       <div className="flex justify-center">
         <div className="flex flex-col items-center row-auto">
           <p className="text-6xl mt-28">
