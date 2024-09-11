@@ -5,16 +5,16 @@ import React from "react";
 import Image from "next/image";
 import { FaEnvelope, FaUsers } from "react-icons/fa";
 
-type Props = { petition: { title: string; desc: string } };
+type Props = { petition: { _id: string; title: string; desc: string } };
 
 const PetitionCard = (props: Props) => {
   const { petition } = props;
-  const { title, desc } = petition;
+  const { _id, title, desc } = petition;
   return (
-    <Link href="#">
+    <Link href={`http://localhost:3000/petitions/${_id}`}>
       <div className="flex flex-row border-2 rounded-xl h-64 mt-6">
-        <div className=" flex flex-col p-6">
-          <div className="flex-grow">
+        <div className=" flex flex-col p-6 flex-grow">
+          <div className=" flex-grow">
             <h4 className="text-2xl md:font-bold">{title}</h4>
             <p className="text-base pt-4">{desc}</p>
           </div>
@@ -49,7 +49,7 @@ const PetitionCard = (props: Props) => {
         </div>
 
         {/* image */}
-        <div className="h-full aspect-square flex justify-center items-center border-l-2">
+        <div className="h-full aspect-square flex justify-center items-center border-l-2 ">
           <Image src="/favicon.ico" alt="" width={200} height={200} />
         </div>
       </div>
