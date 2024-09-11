@@ -1,18 +1,18 @@
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
+import mongoose, { Schema } from "mongoose";
 
-var petitionSchema = new Schema({
-  title: { type: String, required: true },
-  text: { type: String, required: true },
-  date_created: { type: Date },
-  created_by: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
+const petitionSchema = new Schema(
+  {
+    title: { type: String, required: true },
+    desc: { type: String, required: true },
+    // created_by: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: "User",
+    // },
   },
-});
+  { timestamps: true }
+);
 
-// petitionSchema.virtual("url").get(function () {
-//   return "post/petition/_id" + this.id;
-// });
+const Petition =
+  mongoose.models.Petition || mongoose.model("Petition", petitionSchema);
 
-module.exports = mongoose.model("Petitions", petitionSchema);
+export default Petition;
