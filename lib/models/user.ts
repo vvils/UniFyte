@@ -10,8 +10,8 @@ var userSchema = new Schema({
     }]
 });
 
-productSchema.virtual('url').get(function(){
-  return 'post/user/_id' + this.id;
-})
+// productSchema.virtual('url').get(function(){
+//   return 'post/user/_id' + this.id;
+// })
 
 module.exports = mongoose.model("Users", userSchema);
