@@ -1,27 +1,24 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import PetitionCard from "../components/petitionCard";
+import connectDB from "../../lib/utils";
+import { getPetitions } from "../../lib/server";
 
-//  EXAMPLE PETITIONS
-const petitions = [
-  {
-    title: "Free Palestine!",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam numquam doloremque, aut corrupti, sapiente maxime minus autem harum nulla vero sed alias illo quasi fugiat ab iusto omnis quibusdam. Amet.",
-  },
-  {
-    title: "PAY WORKERS MORE!",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam numquam doloremque, aut corrupti, sapiente maxime minus autem harum nulla vero sed alias illo quasi fugiat ab iusto omnis quibusdam. Amet. Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam numquam doloremque, aut corrupti, sapiente maxime minus autem harum nulla vero sed alias illo quasi fugiat ab iusto omnis quibusdam. Amet.",
-  },
-  {
-    title: "More FINAID!",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam numquam doloremque, aut corrupti, sapiente maxime minus autem harum nulla vero sed alias illo quasi fugiat ab iusto omnis quibusdam. Amet. Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam numquam doloremque, aut corrupti, sapiente maxime minus autem harum nulla vero sed alias illo quasi fugiat ab iusto omnis quibusdam. Amet.",
-  },
-];
+connectDB();
 
 export default function HomePage() {
-  //Testing Purposes:
-  // const [petitionsLinks, setPetitionLinks] = useState([1, 2]);
+  const [petitions, setPetitions] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/api/petitions/", {
+      cache: "no-store",
+    })
+      .then((res) => res.json())
+      .then(({ petitions }) => {
+        setPetitions(petitions);
+      });
+  }, []);
 
   return (
     <main className="h-full">
