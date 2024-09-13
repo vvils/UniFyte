@@ -6,14 +6,17 @@ import { FaUsers, FaEnvelope } from "react-icons/fa";
 //  EXAMPLE PETITIONS
 const petitions = [
   {
+    _id: "1",
     title: "Free Palestine!",
     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam numquam doloremque, aut corrupti, sapiente maxime minus autem harum nulla vero sed alias illo quasi fugiat ab iusto omnis quibusdam. Amet.",
   },
   {
+    _id: "2",
     title: "PAY WORKERS MORE!",
     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam numquam doloremque, aut corrupti, sapiente maxime minus autem harum nulla vero sed alias illo quasi fugiat ab iusto omnis quibusdam. Amet. Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam numquam doloremque, aut corrupti, sapiente maxime minus autem harum nulla vero sed alias illo quasi fugiat ab iusto omnis quibusdam. Amet.",
   },
   {
+    _id: "3",
     title: "More FINAID!",
     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam numquam doloremque, aut corrupti, sapiente maxime minus autem harum nulla vero sed alias illo quasi fugiat ab iusto omnis quibusdam. Amet. Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam numquam doloremque, aut corrupti, sapiente maxime minus autem harum nulla vero sed alias illo quasi fugiat ab iusto omnis quibusdam. Amet.",
   },

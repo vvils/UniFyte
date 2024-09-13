@@ -13,6 +13,7 @@
     "@tiptap/pm": "^2.6.6",
     "@tiptap/react": "^2.6.6",
     "@tiptap/starter-kit": "^2.6.6",
+    "@types/mongoose": "^5.11.96",
     "cors": "^2.8.5",
     "framer-motion": "^11.3.30",
     "lucide-react": "^0.439.0",
