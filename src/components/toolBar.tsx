@@ -8,7 +8,6 @@ import {
   Italic,
   List,
   ListOrdered,
-  Underline,
   Quote,
   Undo,
   Redo,
@@ -26,7 +25,7 @@ type Props = {
     }
     return (
       <div
-        className="mt-16 px-4 py-3 rounded-tl-md rounded-tr-md flex justify-between items-start
+        className="mt-6 px-4 py-3 rounded-tl-md rounded-tr-md flex justify-between items-start
       gap-5 w-full flex-wrap border border-gray-700"
       >
         <div className="flex justify-start items-center gap-5 w-full lg:w-10/12 flex-wrap ">
@@ -56,19 +55,6 @@ type Props = {
           >
             <Italic className="w-5 h-5" />
           </button>
-          {/* <button
-            onClick={(e) => {
-              e.preventDefault();
-              editor.chain().focus().toggleUnderline().run();
-            }}
-            className={
-              editor.isActive("underline")
-                ? "bg-sky-700 text-white p-2 rounded-lg"
-                : "text-sky-400"
-            }
-          >
-            <Underline className="w-5 h-5" />
-          </button> */}
           <button
             onClick={(e) => {
               e.preventDefault();
@@ -162,15 +148,6 @@ type Props = {
             <Redo className="w-5 h-5" />
           </button>
         </div>
-        
-        {content && (
-          <button
-            type="submit"
-            className="px-4 bg-sky-700 text-white py-2 rounded-md"
-          >
-            Add
-          </button>
-        )}
 
       </div>
     );

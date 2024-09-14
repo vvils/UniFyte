@@ -1,14 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
-import NavBar from "../../components/navBar";
 import Tiptap from "@/components/textEditor";
-
-import {
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
-} from "@nextui-org/react";
+import DragAndDrop from "@/components/dragAndDrop";
+import { POST } from "../api/petitions/route";
 
 interface University {
   name: string;
@@ -46,14 +40,40 @@ export default function PetitionPage() {
     }
   };
 
-  const handleSubmit = (e:any) => {
-    e.preventDefault()
-    const data = {
-      title: title
-    }
-
-    console.log(`The petition data was submitted ${title}`)
+  const handleContentChange = (content: any) => {
+    setText(content)
   }
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+
+    const data = {
+      title: title,
+      desc: text,
+    };
+
+    try {
+      const response = await fetch("http://localhost:3000/api/petitions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        console.log("Petition created successfully!");
+        setTitle("");
+        setText("");
+      } 
+      else {
+        console.error("Failed to create petition");
+      }
+    } 
+    catch (error) {
+      console.error("Error submitting petition:", error);
+    }
+  };
 
   const handleSearch = (e:any) => {
     const searchValue = e.target.value.toLowerCase();
@@ -70,24 +90,22 @@ export default function PetitionPage() {
   return (
     <main className="min-h-screen justify-between p-4">
       <div className="flex justify-center mt-16">
-        <div className="flex flex-col items-center row-auto">
+        <div className="flex flex-col row-auto">
           {currentQuestionIndex === 0 && (
             <div>
               <h1 className="md:font-bold text-5xl">
                 What University do you go to?
               </h1>
               <h1 className="text-2xl mt-8">Connect with people near you</h1>
-
               
-                  <input
-                    type="text"
-                    value={searchedUniversity}
-                    onChange={handleSearch}
-                    placeholder="Enter a University"
-                    className="mt-8 w-full p-4 rounded-2xl border-2 border-black"
-                  />
+              <input
+                type="text"
+                value={searchedUniversity}
+                onChange={handleSearch}
+                placeholder="Enter a University"
+                className="mt-8 w-full p-4 rounded-2xl border-2 border-black"
+              />
                 
-
               {searchedUniversity && (
                   <div className="mt-4 border border-gray-200 rounded-md shadow-lg max-h-64 overflow-y-auto">
                     {filteredUniversity.length > 0 ? (
@@ -110,12 +128,15 @@ export default function PetitionPage() {
           )}
 
           {currentQuestionIndex === 1 && (
-            <div>
+            <div className ="flex flex-col">
               <h1 className="md:font-bold text-5xl">
                 How would you like to write your petition?
               </h1>
-              <button className="text-2xl mt-12 ml-52 p-8 border-2 rounded-xl">
+              <button className="text-2xl mt-12 pt-8 pb-8 border-2 rounded-xl">
                 Create Your Petition from Stratch
+              </button>
+              <button className="text-2xl mt-12 pt-8 pb-8 border-2 rounded-xl">
+                Generate Your Petition with AI This is a test
               </button>
             </div>
           )}
@@ -128,7 +149,7 @@ export default function PetitionPage() {
               <input
                 type="text"
                 placeholder="Enter your title"
-                className="mt-8 w-full p-2 rounded-md border-2"
+                className="mt-8 w-full p-4 rounded-2xl border-2 border-black"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
@@ -140,17 +161,19 @@ export default function PetitionPage() {
               <h1 className="md:font-bold text-5xl">
                 Write are you writing about?
               </h1>
-              <h1 className="items-center text-3xl">
+              <h1 className="items-center text-3xl mt-4">
                 Start from scratch
               </h1>
               <Tiptap
-               content={text}/>
+                onChange = {(text: string) => handleContentChange(text)}
+                content={text}/>
             </div>
           )}
 
           {currentQuestionIndex === 4 && (
             <div>
               <h1 className="md:font-bold text-5xl">Add an Image</h1>
+              <DragAndDrop/>
             </div>
           )}
 
@@ -159,26 +182,32 @@ export default function PetitionPage() {
               <h1 className="md:font-bold text-5xl">
                 Your petition is ready to make a difference
               </h1>
-              {/* <button>Preview Petition</button> */}
+              <button className="border-2 rounded-xl mt-12 text-xl p-4">Preview Petition</button>
               <button className="border-2 rounded-xl mt-12 text-xl p-4" onClick={handleSubmit}>Create Petition</button>
             </div>
           )}
 
           <div className="flex-row">
-              <button
-                className="border-2 rounded-xl mt-12 text-xl p-3"
-                onClick={() => {decrementCounter()}}
-              >
-                Back
-              </button>
+              {currentQuestionIndex === 0 || currentQuestionIndex === 5 ? 
+              <div></div>: 
+              (
+                <button className="border-2 rounded-xl mt-12 text-xl p-3" onClick={() => {decrementCounter()}}>
+                  Back
+                </button>
+              )}
               
-              <button
-                className="bg-blue-300 border-2 rounded-xl ml-4 mt-12 text-xl p-3"
-                disabled={activeButton}
-                onClick={() => {incrementCounter()}}
-              >
-                Continue
-              </button>
+              {currentQuestionIndex === 5 ? 
+              <div></div> :
+              (
+                <button
+                  className="bg-blue-300 border-2 rounded-xl ml-4 mt-12 text-xl p-3"
+                  disabled={activeButton}
+                  onClick={() => {incrementCounter()}}
+                >
+                  Continue
+                </button>
+              )}
+              
           </div>
         </div>
       </div>
