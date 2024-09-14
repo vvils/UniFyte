@@ -2,10 +2,6 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import PetitionCard from "../components/petitionCard";
-import connectDB from "../../lib/utils";
-import { getPetitions } from "../../lib/server";
-
-connectDB();
 
 export default function HomePage() {
   const [petitions, setPetitions] = useState([]);
