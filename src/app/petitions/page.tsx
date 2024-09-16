@@ -4,7 +4,19 @@ import PetitionCard from "@/components/petitionCard";
 import Petition from "../../../lib/models/petition";
 import useSWR from "swr";
 
-type Petition = { _id: string; title: string; desc: string };
+type Petition = {
+  _id: string;
+  title: string;
+  desc: string;
+  media?: string;
+  signed: number;
+  goal: number;
+  upvotes: number;
+  uni: string;
+  author: { name: string };
+  userName: string;
+  createdAt: Date;
+};
 
 const PetitionPage = () => {
   const [toggle, setToggle] = useState(0);
@@ -72,9 +84,11 @@ const PetitionPage = () => {
         </nav>
 
         <div className="max-w-screen-xl px-4 py-3 mx-auto">
-          {data.petitions.map((petition: Petition) => (
-            <PetitionCard key={petition._id} petition={petition} />
-          ))}
+          {data.petitions.map((petition: Petition) => {
+            petition.userName = petition.author.name;
+
+            return <PetitionCard key={petition._id} petition={petition} />;
+          })}
         </div>
       </main>
     </div>
