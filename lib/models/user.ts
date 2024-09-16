@@ -1,17 +1,20 @@
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
+import mongoose, { Schema } from "mongoose";
 
-var userSchema = new Schema({
-    name: {type: String, required: true},
-    date_created: {type: Date},
-    petitions: [{
+var userSchema = new Schema(
+  {
+    name: { type: String, required: true },
+    email: { type: String, required: true },
+    uni: { type: String, required: true },
+    petitions: [
+      {
         type: Schema.Types.ObjectId,
-        ref: "Petition"
-    }]
-});
+        ref: "Petition",
+      },
+    ],
+  },
+  { timestamps: true }
+);
 
-// productSchema.virtual('url').get(function(){
-//   return 'post/user/_id' + this.id;
-// })
+const User = mongoose.models.User || mongoose.model("User", userSchema);
 
-module.exports = mongoose.model("Users", userSchema);
+export default User;

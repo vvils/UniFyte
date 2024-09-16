@@ -8,7 +8,7 @@ const SoftContainer = ({
   className?: string;
 }) => {
   return (
-    <div className={`bg-white shadow-lg rounded-lg border-1 p-6 ${className}`}>
+    <div className={`bg-white shadow-lg rounded-xl border-1 p-6 ${className}`}>
       {children}
     </div>
   );

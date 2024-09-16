@@ -1,28 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "../../../../../lib/utils";
-import Petition from "../../../../../lib/models/petition";
+import User from "../../../../../lib/models/user";
 
 type Params = { params: { id: string } };
-
+//fix
 export async function PUT(req: NextRequest, { params }: Params) {
   const { id } = params;
-  const { title, desc } = await req.json();
+  const { name, email } = await req.json();
   await connectDB();
-  await Petition.findByIdAndUpdate(id, { title, desc });
+  await User.findByIdAndUpdate(id, { name, email });
   return NextResponse.json({ message: "updated" }, { status: 200 });
 }
 export async function GET(req: NextRequest, { params }: Params) {
   const { id } = params;
   await connectDB();
-  const petition = await Petition.findOne({ _id: id }).populate(
-    "author",
-    "name"
-  );
-  return NextResponse.json({ petition }, { status: 200 });
+  const user = await User.findOne({ _id: id });
+  return NextResponse.json({ user }, { status: 200 });
 }
 export async function DELETE(req: NextRequest, { params }: Params) {
   const { id } = params;
   await connectDB();
-  await Petition.findByIdAndDelete(id);
+  await User.findByIdAndDelete(id);
   return NextResponse.json({ message: "del" }, { status: 200 });
 }
