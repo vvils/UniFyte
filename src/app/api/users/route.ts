@@ -1,42 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
-import Petition from "../../../../lib/models/petition";
 import connectDB from "../../../../lib/utils";
+import User from "../../../../lib/models/user";
 
 export async function POST(req: NextRequest) {
-  const {
-    title,
-    desc,
-    media = "",
-    signed = 0,
-    goal = 2000,
-    upvotes = 0,
-    uni,
-    author,
-  } = await req.json();
+  const { name, email, uni } = await req.json();
   await connectDB();
-
-  await Petition.create({
-    title,
-    desc,
-    media,
-    signed,
-    goal,
-    upvotes,
-    uni,
-    author,
-  });
+  await User.create({ name, email, uni });
   return NextResponse.json({ message: "nice" }, { status: 201 });
 }
 
 export async function GET() {
   await connectDB();
-  const petitions = await Petition.find().populate("author", "name");
-
-  return NextResponse.json({ petitions });
+  const users = await User.find();
+  return NextResponse.json({ users });
 }
 export async function DELETE(req: NextRequest) {
   const id = req.nextUrl.searchParams.get("id");
   await connectDB();
-  await Petition.findByIdAndDelete(id);
+  await User.findByIdAndDelete(id);
   return NextResponse.json({ message: "del" }, { status: 200 });
 }

@@ -24,6 +24,10 @@ const links = [
     url: "/petitions",
     title: "Browse",
   },
+  {
+    url: "/test",
+    title: "Testing",
+  },
 ];
 
 export default function NavBar() {
