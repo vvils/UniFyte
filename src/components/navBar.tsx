@@ -1,15 +1,12 @@
 "use client";
 import React from "react";
 import NavLink from "./navLink";
-import {
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
-  Button,
-} from "@nextui-org/react";
 import Link from "next/link";
 import Image from "next/image";
+import ProfileButton from "./auth/profile";
+import LoginButton from "./auth/loginButton";
+// import { Button } from "@nextui-org/react"
+
 const links = [
   // {
   //   url: "/",
@@ -28,6 +25,7 @@ const links = [
     title: "Browse",
   },
 ];
+
 export default function NavBar() {
   return (
     // <div className="flex items-center justify-between h-full px-4 text-xl sm:px-8 md:px-12 lg:px-20 xl:px-48">
@@ -58,26 +56,13 @@ export default function NavBar() {
           Search
         </Link>
 
-        <Profile />
+        <LoginButton>
+          <button className="">
+            login
+          </button>
+        </LoginButton>
+        {/* <ProfileButton /> */}
       </div>
     </nav>
   );
-
-  function Profile() {
-    return (
-      <Dropdown>
-        <DropdownTrigger>
-          <Button variant="bordered">Profile</Button>
-        </DropdownTrigger>
-        <DropdownMenu aria-label="Static Actions">
-          <DropdownItem href="/profile" key="edit">
-            Edit Profile
-          </DropdownItem>
-          <DropdownItem key="Log out" className="text-danger" color="danger">
-            Logout
-          </DropdownItem>
-        </DropdownMenu>
-      </Dropdown>
-    );
-  }
 }

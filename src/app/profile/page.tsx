@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 
-export default function Profile() {
+export default function ProfilePage() {
   return (
     <main className="h-full">
       <div className="items-center flex flex-col gap-4 mt-8">
