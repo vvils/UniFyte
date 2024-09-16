@@ -6,6 +6,8 @@ import { Button } from "@nextui-org/react";
 import Image from "next/image";
 import SoftContainer from "@/components/softContainer";
 import { useRouter } from "next/navigation";
+import InteractiveButtons from "@/components/interactiveButtons";
+import { AcademicCapIcon, CalendarIcon } from "@heroicons/react/24/outline";
 
 type Petition = { _id: string; title: string; desc: string };
 
@@ -26,7 +28,7 @@ const PetitionID = ({ params }: { params: { id: string } }) => {
   if (error) return <div>Failed to load data</div>;
   if (isLoading) return <div>Loading...</div>;
 
-  const { petition } = data;
+  let { petition } = data;
   const handleEdit = async () => {
     try {
       const res = await fetch(
@@ -40,7 +42,10 @@ const PetitionID = ({ params }: { params: { id: string } }) => {
       if (!res.ok) {
         throw new Error("failed to update");
       }
-      window.location.reload();
+      petition.title = title;
+      petition.desc = desc;
+      setEdit(false);
+      router.refresh();
     } catch (err) {
       console.log(err);
     }
@@ -61,9 +66,31 @@ const PetitionID = ({ params }: { params: { id: string } }) => {
       console.log(err);
     }
   };
-
+  const formattedDate = new Date(petition.createdAt).toLocaleDateString(
+    "en-US",
+    {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    }
+  );
   return (
-    <div className="flex justify-center items-center py-8 px-24">
+    <div className="flex flex-col py-8 px-24 gap-4">
+      {/* title */}
+      <SoftContainer>
+        {edit ? (
+          <textarea
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="w-full p-2 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            rows={1}
+          />
+        ) : (
+          <h1 className="text-3xl font-bold text-black">{petition.title}</h1>
+        )}
+      </SoftContainer>
+      {/* under */}
+      <div className="flex justify-center items-center "></div>
       <div className=" flex flex-row justify-center gap-8 w-full">
         <div className=" flex flex-col justify-center items-center w-[60%] gap-8">
           {/* 1st col Hero Section */}
@@ -77,25 +104,30 @@ const PetitionID = ({ params }: { params: { id: string } }) => {
                 objectFit="cover"
               />
             </div>
-            <div className="p-6 flex flex-col justify-center gap-4">
-              {edit ? (
-                <textarea
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                  className="w-full p-2 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                  rows={1}
-                />
-              ) : (
-                <h1 className="text-3xl font-bold text-black">
-                  {petition.title}
-                </h1>
-              )}
+            <div className=" flex flex-col justify-center gap-4 mt-4">
+              <div className="flex justify-between">
+                <InteractiveButtons upvotes={petition.upvotes} />
+                <div className="flex gap-4  ">
+                  {/* Date */}
+                  <div className="flex items-center">
+                    <CalendarIcon className="w-5 h-5 mr-1 text-gray-400" />
+                    <p className="text-sm">Created on {formattedDate}</p>
+                  </div>
+                  {/* uni */}
+                  <div className="flex items-center ml-auto">
+                    <AcademicCapIcon className="w-5 h-5 mr-1 text-gray-400" />
+                    <p className="text-sm">{petition.uni}</p>
+                  </div>
+                </div>
+              </div>
               <h2 className=" text-2xl font-bold">Why this petition matters</h2>
               <div className=" flex gap-2 items-center">
                 <FaUser className="text-gray-500" />
                 <p className="text-gray-500">
                   Started By{" "}
-                  <span className=" text-black font-bold">Wilson Weng</span>
+                  <span className=" text-black font-bold">
+                    {petition.author.name}
+                  </span>
                 </p>
               </div>
               {edit ? (
@@ -180,17 +212,23 @@ const PetitionID = ({ params }: { params: { id: string } }) => {
             <div className="w-full bg-gray-200 rounded-full h-2.5">
               <div
                 className="bg-purple-500 h-2.5 rounded-full"
-                style={{ width: "80%" }}
+                style={{
+                  width: `calc(${petition.signed}/${petition.goal}*100%)`,
+                }}
               ></div>
             </div>
 
             <div className="flex justify-between items-center">
               <div>
-                <p className="text-4xl font-bold text-purple-700">39,435</p>
+                <p className="text-4xl font-bold text-purple-700">
+                  {petition.signed}
+                </p>
                 <p className="text-sm text-purple-600">Signatures</p>
               </div>
               <div className="text-right">
-                <p className="text-4xl font-bold text-gray-700">50,000</p>
+                <p className="text-4xl font-bold text-gray-700">
+                  {petition.goal}
+                </p>
                 <p className="text-sm text-gray-500">Next Goal</p>
               </div>
             </div>
@@ -243,13 +281,15 @@ const PetitionID = ({ params }: { params: { id: string } }) => {
 
               {confDelete && (
                 <>
-                  <p className=" border-t-1">
-                    Are you sure you want to delete this item?
+                  <div className="flex gap-4">
+                    <Button className=" bg-red-500" onClick={handleDelete}>
+                      Yes, Delete
+                    </Button>
+                    <Button onClick={() => setConfDelete(false)}>Cancel</Button>
+                  </div>
+                  <p className=" ">
+                    Are you sure you want to delete this petition?
                   </p>
-                  <Button className=" bg-red-500" onClick={handleDelete}>
-                    Yes, Delete
-                  </Button>
-                  <Button onClick={() => setConfDelete(false)}>Cancel</Button>
                 </>
               )}
             </div>
