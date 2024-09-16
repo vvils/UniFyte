@@ -4,10 +4,22 @@ const petitionSchema = new Schema(
   {
     title: { type: String, required: true },
     desc: { type: String, required: true },
-    // created_by: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: "User",
-    // },
+    media: { type: String },
+    signed: { type: Number },
+    goal: { type: Number },
+    upvotes: { type: Number },
+    uni: { type: String, required: true },
+    // comments:[
+    //   {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "Comment",
+    //   },
+    // ],
+    author: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
   { timestamps: true }
 );
