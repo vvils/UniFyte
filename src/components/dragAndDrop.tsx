@@ -1,52 +1,95 @@
-"use client"
+"use client";
 
-import React, {DragEvent, useState} from 'react';
+import React, { DragEvent, useState } from "react";
+import Image from "next/image";
 
-export default function DragAndDrop(){
-    const [dragOver, setDragOver] = useState(false)
-    const [drapped, setDropped] = useState(false)
+export default function DragAndDrop() {
+  const [dragOver, setDragOver] = useState(false);
+  const [dropped, setDropped] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
 
-    const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
-        e.preventDefault()
-        setDragOver(true)
-        setDropped(false)
+  const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setDragOver(true);
+    setDropped(false);
+  };
+
+  const handleDragLeave = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setDragOver(false);
+    setDropped(false);
+  };
+
+  const handleDrop = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setDragOver(false);
+    setDropped(true);
+
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      const file = e.dataTransfer.files[0];
+      setFile(file)
+      const fileURL = URL.createObjectURL(file)
+      setPreviewImage(fileURL)
+      console.log("This was the dropped file", file);
     }
+  };
 
-    const handleDragLeave = (e:DragEvent<HTMLDivElement>) => {
-        e.preventDefault()
-        setDragOver(false)
-        setDropped(false)
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const selectedFile = e.target.files[0];
+      setFile(selectedFile);
+      const fileURL = URL.createObjectURL(selectedFile)
+      setPreviewImage(fileURL)
+      console.log("This was the uploaded file", selectedFile);
     }
+  };
 
-    const handleDrop = (e:DragEvent<HTMLDivElement>) => {
-        e.preventDefault()
-        setDragOver(false)
-        setDropped(true)
-
-
-        if(e.dataTransfer.files && e.dataTransfer.files[0]){
-            const file = e.dataTransfer.files[0]
-            console.log("This was the dropped file", file)
-        }
+  const handleClickUpload = () => {
+    const fileInput = document.getElementById("fileInput");
+    if (fileInput) {
+      fileInput.click();
     }
+  };
 
-    return(
-        <main className="flex flex-col border-2 border-dashed border-gray-800 w-[700px] h-[500px] p-[16px] mt-8">
-            <div className="flex flex-col w-full h-full items-center">
-                <form>
-                    <div 
-                    onDragOver={handleDragOver}
-                    onDragLeave={handleDragLeave}
-                    onDrop={handleDrop}
-                    className="flex w-full h-[200px] border-dashed border-gray-700 items-center justify-center">
-                        <p>Drag your image here</p>
-                    </div>
-                    <button className="border-2 border-orange-300 p-2 rounded-xl text-orange-300 font-bold hover:bg-gray-200">
-                        Upload An Image
-                    </button>
-                </form>
-            </div>
-        </main>
-    )
+  return (
+    <main className="flex flex-col border-2 border-dashed border-gray-800 w-[600px] h-[400px] mt-8 rounded-2xl">
+      <div className="flex flex-col w-full h-full items-center">
+        <form>
+          <div
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+            className="flex flex-col w-[600px] h-[400px] border-gray-700 items-center justify-center"
+          >
 
+            {previewImage ? (
+                 <Image
+                 src={previewImage}
+                 alt="Dropped file preview"
+                 className="w-full h-full object-cover rounded-2xl"
+                 width={600}
+                 height={400}
+               />
+             ):(
+            <>
+            <input
+              type="file"
+              id="fileInput"
+              accept="image/*"
+              style={{ display: "none" }}
+              onChange={handleFileUpload}
+            />
+            <button
+              className="border-2 border-orange-300 p-2 rounded-xl text-orange-300 font-bold hover:bg-gray-200"
+              onClick={handleClickUpload}
+            >
+              Upload An Image
+            </button>
+             </>)}   
+          </div>
+        </form>
+      </div>
+    </main>
+  );
 }
