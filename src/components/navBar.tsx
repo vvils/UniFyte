@@ -24,8 +24,12 @@ const links = [
     title: "My Petitions",
   },
   {
-    url: "/browse",
+    url: "/petitions",
     title: "Browse",
+  },
+  {
+    url: "/test",
+    title: "Testing",
   },
 ];
 export default function NavBar() {
@@ -70,7 +74,9 @@ export default function NavBar() {
           <Button variant="bordered">Profile</Button>
         </DropdownTrigger>
         <DropdownMenu aria-label="Static Actions">
-          <DropdownItem href= "/profile" key="edit">Edit Profile</DropdownItem>
+          <DropdownItem href="/profile" key="edit">
+            Edit Profile
+          </DropdownItem>
           <DropdownItem key="Log out" className="text-danger" color="danger">
             Logout
           </DropdownItem>

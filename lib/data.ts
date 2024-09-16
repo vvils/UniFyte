@@ -28,4 +28,3 @@ export async function getPetition(id: string) {
     return undefined;
   }
 }
-
