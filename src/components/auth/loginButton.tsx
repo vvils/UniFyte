@@ -13,8 +13,10 @@ export const LoginButton = ({
     mode = "redirect",
     asChild
 }: LoginButtonProps) => {
+    const router = useRouter();
+
     const onClick = () => {
-        console.log("Clicked");
+        router.push('/login')
     }
     return(
         <span onClick={onClick} className="cursor-pointer">

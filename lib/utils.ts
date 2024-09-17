@@ -1,4 +1,5 @@
 import mongoose, { ConnectionStates, ConnectOptions } from "mongoose";
+import User from "./models/user"
 
 const connection: { isConnected?: ConnectionStates } = {};
 
@@ -6,6 +7,7 @@ const connectDB = async () => {
   try {
     if (connection.isConnected) {
       console.log("Mongo Exists");
+      User
       return;
     }
     const db = await mongoose.connect(process.env.MONGODB_URI!, {
