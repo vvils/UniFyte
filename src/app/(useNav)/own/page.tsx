@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import PetitionCard from "../../components/petitionCard";
+import PetitionCard from "../../../components/petitionCard";
 import { on } from "events";
 import Link from "next/link";
 
@@ -89,9 +89,7 @@ const Own = (props: Props) => {
       <div className="flex flex-col items-center justify-center pt-8">
         <h1 className="text-center text-3xl font-bold">My Petitions</h1>
         <div className="max-w-screen-xl px-4 py-3 mx-auto">
-          {petitions.map((petition, index) => (
-            <PetitionCard key={index} petition={petition} />
-          ))}
+          
         </div>
       </div>
     </div>
