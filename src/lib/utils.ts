@@ -15,8 +15,10 @@ const connectDB = async () => {
     } as ConnectOptions);
     connection.isConnected = db.connections[0].readyState;
     console.log("MongoDB Connected");
+    return Promise.resolve(true)
   } catch (error: any) {
     console.error("Error connecting to MongoDB:", error);
+    return Promise.resolve(error)
     // throw new Error(error);
   }
 };

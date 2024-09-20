@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import PetitionCard from "@/components/petitionCard";
-import Petition from "../../../../lib/models/petition"
+import Petition from "../../../lib/models/petition"
 import useSWR from "swr";
 
 type Petition = {

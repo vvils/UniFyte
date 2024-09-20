@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import connectDB from "../../../../lib/utils";
-import User from "../../../../lib/models/user";
+import connectDB from "../../../lib/utils";
+import User from "../../../lib/models/user";
 
 export async function POST(req: NextRequest) {
   const { name, email, uni } = await req.json();

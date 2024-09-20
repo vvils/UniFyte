@@ -3,8 +3,9 @@ import React from "react";
 import NavLink from "./navLink";
 import Link from "next/link";
 import Image from "next/image";
-import ProfileButton from "./auth/profile";
-import LoginButton from "./auth/loginButton";
+import ProfileButton from "../profile";
+import LoginButton from "./loginButton";
+import LogoutButton from "./logoutButton";
 // import { Button } from "@nextui-org/react"
 
 const links = [
@@ -55,16 +56,13 @@ export default function NavBar() {
       <div className="flex flex-row gap-6 justify-center items-center">
         <Link
           href="/search"
-          className="text-xl bg-blue-500 text-white py-2 px-4 mr-4 rounded hover:bg-blue-600"
+          className="text-md text-gray-800 py-2 px-4 mr-4 rounded-full hover:bg-gray-200 transition ease-in-out duration-200 transform hover:scale-105"
         >
-          Search
+          Find Petitions!
         </Link>
 
-        <LoginButton>
-          <button className="">
-            login
-          </button>
-        </LoginButton>
+        <LoginButton className="text-md text-gray-800 py-2 px-4 mr-4 rounded-full hover:bg-gray-200 transition ease-in-out duration-200 transform hover:scale-105" />
+        <LogoutButton className="text-md text-gray-800 py-2 px-4 mr-4 rounded-full hover:bg-gray-200 transition ease-in-out duration-200 transform hover:scale-105" />
         {/* <ProfileButton /> */}
       </div>
     </nav>
