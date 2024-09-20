@@ -3,9 +3,16 @@
 import { handleGoogleLogin } from "@/components/handleGoogleLogin";
 import Link from "next/link";
 import Image from "next/image";
+import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 
 export const LogInPage: React.FC = () => {
+  const [formData, setFormData] = useState({ email: ""  as string})
+
+  const handleSubmit = ( event: React.FormEvent ) => {
+    
+  } 
+
   return (
     <div className="relative flex justify-center items-center h-screen bg-gray-100">
       <div className="absolute top-0 left-0 p-4">
@@ -16,6 +23,22 @@ export const LogInPage: React.FC = () => {
 
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm">
         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+        <div className="">
+          <form className="" onSubmit={handleSubmit}>
+            <input
+              className=""
+              type="email"
+              maxLength={320}
+              placeholder="Email Address"
+            />
+            <input
+              className=""
+              type="email"
+              maxLength={320}
+              placeholder="Email Address"
+            />
+          </form>
+        </div>
         <div className="flex justify-center">
           <button
             className="flex items-center bg-white border border-gray-300 px-4 py-2 rounded-md shadow-sm hover:bg-gray-100 transition duration-200"
