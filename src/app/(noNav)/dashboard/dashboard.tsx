@@ -1,10 +1,16 @@
-"use client";
-import React, { useState } from "react";
+import LogoutButton from "@/components/navbar/logoutButton";
 import Image from "next/image";
+import Link from "next/link";
 
-export default function ProfilePage() {
+export const DashboardPage: React.FC = () => {
   return (
     <main className="h-full">
+      <div className="absolute top-0 left-0 p-4">
+        <Link href={"/"}>
+          <Image src="/favicon.ico" alt="" width={52} height={52} />
+        </Link>
+      </div>
+      
       <div className="items-center flex flex-col gap-4 mt-8">
         <h1 className="text-4xl font-bold">Edit Profile</h1>
         <Image
@@ -57,10 +63,7 @@ export default function ProfilePage() {
           />
         </label>
       </div>
-
-      <div>
-        <a href="/api/auth/login">Login</a>
-      </div>
+      <LogoutButton className="text-md text-gray-800 py-2 px-4 mr-4 rounded-full hover:bg-gray-200 transition ease-in-out duration-200 transform hover:scale-105" />
     </main>
   );
-}
+};

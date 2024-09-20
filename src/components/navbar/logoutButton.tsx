@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import handleLogout from "../../lib/auth/logoutServerAction"
+import { handleGoogleLogout } from "../handleGoogleLogout"
 
 const LogoutButton = (props: {
   children?: React.ReactNode;
@@ -14,7 +14,7 @@ const LogoutButton = (props: {
       className={props.className}
       style={{ cursor: "pointer" }}
       onClick={() => {
-        handleLogout();
+        handleGoogleLogout();
       }}
     >
       {props.children || "Logout"}

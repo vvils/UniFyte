@@ -13,7 +13,7 @@ const LoginButton = (props: {
       className={props.className}
       style={{ cursor: "pointer" }}
       onClick={() => {
-        router.push("/login");
+        router.push("/dashboard");
       }}
     >
       {props.children || "Login"}
