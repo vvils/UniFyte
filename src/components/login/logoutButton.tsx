@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { handleGoogleLogout } from "../handleGoogleLogout"
+import { handleGoogleLogout } from "./handleGoogleLogout"
 
 const LogoutButton = (props: {
   children?: React.ReactNode;

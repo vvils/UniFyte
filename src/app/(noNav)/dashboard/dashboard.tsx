@@ -1,4 +1,4 @@
-import LogoutButton from "@/components/navbar/logoutButton";
+import LogoutButton from "@/components/login/logoutButton";
 import Image from "next/image";
 import Link from "next/link";
 

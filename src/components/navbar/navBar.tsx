@@ -1,10 +1,13 @@
 "use client";
+
 import React from "react";
 import NavLink from "./navLink";
 import Link from "next/link";
 import Image from "next/image";
-import LoginButton from "./loginButton";
-import LogoutButton from "./logoutButton";
+import LoginButton from "../login/loginButton";
+import LogoutButton from "../login/logoutButton";
+import { useSession } from "next-auth/react";
+import ProfileButton from "../profile";
 
 const links = [
   {
@@ -26,6 +29,8 @@ const links = [
 ];
 
 export default function NavBar() {
+  const { data: session, status } = useSession();
+
   return (
     <nav className="h-full w-full flex justify-between border-b-1 items-center px-2 sm:px-8 md:px-12 lg:px-20 xl:px-32">
       <div className="flex flex-row mt-0 gap-4 md:gap-6 items-center">
@@ -48,17 +53,23 @@ export default function NavBar() {
       </div>
 
       <div className="flex flex-row gap-4 md:gap-6 justify-center items-center">
-        {/* "Find Petitions" Button */}
+        {/* Search page */}
         <Link
           href="/search"
           className="text-md md:text-md text-gray-800 py-2 px-3 md:px-4 rounded-full hover:bg-gray-200 transition ease-in-out duration-200 transform hover:scale-105"
         >
           Find Petitions!
         </Link>
-
-        {/* Login / Logout Buttons */}
-        <LoginButton className="text-md md:text-md text-gray-800 py-2 px-3 md:px-4 rounded-full hover:bg-gray-200 transition ease-in-out duration-200 transform hover:scale-105" />
-        <LogoutButton className="text-md md:text-md text-gray-800 py-2 px-3 md:px-4 rounded-full hover:bg-gray-200 transition ease-in-out duration-200 transform hover:scale-105" />
+        
+        {/* Login and out buttons */}
+        {status === "loading" ? (
+          // placeholder while waiting for session
+          <p>Loading...</p>
+        ) : session ? (
+          <ProfileButton/>
+        ) : (
+          <LoginButton className="text-md md:text-md text-gray-800 py-2 px-3 md:px-4 rounded-full hover:bg-gray-200 transition ease-in-out duration-200 transform hover:scale-105" />
+        )}
       </div>
 
       {/* Mobile Hamburger Menu (optional) */}
