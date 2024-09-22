@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import NavBar from "../../components/navBar";
 
 export default function PetitionPage() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
