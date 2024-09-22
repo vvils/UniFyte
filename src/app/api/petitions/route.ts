@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import Petition from "../../../../lib/models/petition";
-import connectDB from "../../../../lib/utils";
+import Petition from "@/lib/models/petition";
+import connectDB from "@/lib/utils";
 
 export async function POST(req: NextRequest) {
   const {
