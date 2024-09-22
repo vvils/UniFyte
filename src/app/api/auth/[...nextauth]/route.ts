@@ -4,7 +4,7 @@ import clientPromise from "@/lib/db"; // Adjust the path as necessary
 import Google from "next-auth/providers/google";
 import type { NextAuthOptions } from "next-auth";
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   // adapter: MongoDBAdapter(clientPromise),
   secret: process.env.NEXTAUTH_SECRET,
   session: {
