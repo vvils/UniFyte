@@ -6,7 +6,7 @@ import { SessionProvider } from "next-auth/react";
 import { AppProps } from "next/app";
 import { Session } from "next-auth";
 
-export default function HomePage () {
+export default function HomePage() {
   const [petitions, setPetitions] = useState([]);
 
   useEffect(() => {
@@ -47,7 +47,9 @@ export default function HomePage () {
         </div>
 
         <div className="max-w-screen-xl px-4 py-3 mx-auto">
-          <p className="text-xl md:font-bold">What&apos;s Happening on Campus</p>
+          <p className="text-xl md:font-bold">
+            What&apos;s Happening on Campus
+          </p>
           {petitions.map((petition, index) => (
             <PetitionCard key={index} petition={petition} />
           ))}
