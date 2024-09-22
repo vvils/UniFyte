@@ -83,13 +83,13 @@ const PetitionPage = () => {
           </button>
         </nav>
 
-        <div className="max-w-screen-xl px-4 py-3 mx-auto">
+        {/* <div className="max-w-screen-xl px-4 py-3 mx-auto">
           {data.petitions.map((petition: Petition) => {
             petition.userName = petition.author.name;
 
             return <PetitionCard key={petition._id} petition={petition} />;
           })}
-        </div>
+        </div> */}
       </main>
     </div>
   );
