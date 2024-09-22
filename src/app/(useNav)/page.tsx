@@ -20,7 +20,6 @@ export default function HomePage () {
   }, []);
 
   return (
-    <SessionProvider>
       <main className="h-full">
         <div className="flex justify-center">
           <div className="flex flex-col items-center row-auto">
@@ -53,6 +52,5 @@ export default function HomePage () {
           ))}
         </div>
       </main>
-    </SessionProvider>
   );
 }
