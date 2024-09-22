@@ -1,8 +1,7 @@
-import NextAuth from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 // import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import clientPromise from "@/lib/db"; // Adjust the path as necessary
 import Google from "next-auth/providers/google";
-import type { NextAuthOptions } from "next-auth";
 
 const authOptions: NextAuthOptions = {
   // adapter: MongoDBAdapter(clientPromise),
@@ -32,7 +31,7 @@ const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      console.log("session callback", {session, token})
+      console.log("session callback", { session, token });
       return {
         ...session,
         user: {
