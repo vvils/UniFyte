@@ -1,7 +1,10 @@
 {
-    "git": {
-      "deploymentEnabled": {
-        "main": false
-      }
+  "git": {
+    "deploymentEnabled": {
+      "main": false,
+      "auth": false,
+      "c": false,
+      "w": false
     }
   }
+}
