@@ -1,11 +1,11 @@
 import NextAuth from "next-auth";
-// import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import clientPromise from "@/lib/db"; // Adjust the path as necessary
 import Google from "next-auth/providers/google";
 import type { NextAuthOptions } from "next-auth";
 
 const authOptions: NextAuthOptions = {
-  // adapter: MongoDBAdapter(clientPromise),
+  adapter: MongoDBAdapter(clientPromise),
   secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
@@ -22,7 +22,8 @@ const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user }) { // JSON web token, modify the return to modify what is in user data
+      console.log("jwt callback", {token, user})
       if (user) {
         return {
           ...token,
@@ -31,7 +32,7 @@ const authOptions: NextAuthOptions = {
       }
       return token;
     },
-    async session({ session, token }) {
+    async session({ session, token }) {  // nextauth stores in cookies
       console.log("session callback", {session, token})
       return {
         ...session,
