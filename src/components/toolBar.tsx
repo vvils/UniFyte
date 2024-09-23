@@ -36,8 +36,8 @@ type Props = {
             }}
             className={
               editor.isActive("bold")
-                ? "bg-sky-700 text-white p-2 rounded-lg"
-                : "text-sky-400"
+                ? "bg-orange-500 text-white p-2 rounded-lg"
+                : "text-orange-300"
             }
           >
             <Bold className="w-5 h-5" />
@@ -49,24 +49,11 @@ type Props = {
             }}
             className={
               editor.isActive("italic")
-                ? "bg-sky-700 text-white p-2 rounded-lg"
-                : "text-sky-400"
+              ? "bg-orange-500 text-white p-2 rounded-lg"
+              : "text-orange-300"
             }
           >
             <Italic className="w-5 h-5" />
-          </button>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              editor.chain().focus().toggleStrike().run();
-            }}
-            className={
-              editor.isActive("strike")
-                ? "bg-sky-700 text-white p-2 rounded-lg"
-                : "text-sky-400"
-            }
-          >
-            <Strikethrough className="w-5 h-5" />
           </button>
   
           <button
@@ -76,8 +63,8 @@ type Props = {
             }}
             className={
               editor.isActive("bulletList")
-                ? "bg-sky-700 text-white p-2 rounded-lg"
-                : "text-sky-400"
+              ? "bg-orange-500 text-white p-2 rounded-lg"
+              : "text-orange-300"
             }
           >
             <List className="w-5 h-5" />
@@ -89,8 +76,8 @@ type Props = {
             }}
             className={
               editor.isActive("orderedList")
-                ? "bg-sky-700 text-white p-2 rounded-lg"
-                : "text-sky-400"
+              ? "bg-orange-500 text-white p-2 rounded-lg"
+              : "text-orange-300"
             }
           >
             <ListOrdered className="w-5 h-5" />
@@ -102,8 +89,8 @@ type Props = {
             }}
             className={
               editor.isActive("blockquote")
-                ? "bg-sky-700 text-white p-2 rounded-lg"
-                : "text-sky-400"
+              ? "bg-orange-500 text-white p-2 rounded-lg"
+              : "text-orange-300"
             }
           >
             <Quote className="w-5 h-5" />
@@ -115,8 +102,8 @@ type Props = {
             }}
             className={
               editor.isActive("code")
-                ? "bg-sky-700 text-white p-2 rounded-lg"
-                : "text-sky-400"
+              ? "bg-orange-500 text-white p-2 rounded-lg"
+              : "text-orange-300"
             }
           >
             <Code className="w-5 h-5" />
@@ -128,8 +115,8 @@ type Props = {
             }}
             className={
               editor.isActive("undo")
-                ? "bg-sky-700 text-white p-2 rounded-lg"
-                : "text-sky-400 hover:bg-sky-700 hover:text-white p-1 hover:rounded-lg"
+                ? "bg-orange-500 text-white p-2 rounded-lg"
+                : "text-orange-300 hover:bg-orange-500 hover:text-white p-1 hover:rounded-lg"
             }
           >
             <Undo className="w-5 h-5" />
@@ -141,8 +128,8 @@ type Props = {
             }}
             className={
               editor.isActive("redo")
-                ? "bg-sky-700 text-white p-2 rounded-lg"
-                : "text-sky-400 hover:bg-sky-700 hover:text-white p-1 hover:rounded-lg"
+              ? "bg-orange-500 text-white p-2 rounded-lg"
+              : "text-orange-300 hover:bg-orange-500 hover:text-white p-1 hover:rounded-lg"
             }
           >
             <Redo className="w-5 h-5" />

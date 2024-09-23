@@ -14,13 +14,12 @@ const Tiptap = ({onChange, content}: any) => {
         content: '',
         editorProps:{
             attributes: {
-                class: 
-                    "h-64 flex flex-col px-4 px-4 py-3 justify-start border-b border-r border-l border-gray-700 items-start gap-3 font-medium text-[16px] rounded-bl-md rounded-br-md outline-none",
+                class: "h-64 flex flex-col px-4 px-4 py-3 justify-start border-b border-r border-l border-gray-700 items-start gap-3 font-medium text-[16px] rounded-bl-md rounded-br-md outline-none",
             }
         },
 
         onUpdate: ({ editor }) => {
-            handleChange(editor.getHTML());
+            handleChange(editor.getText());
         }
     });
 

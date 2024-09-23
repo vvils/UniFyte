@@ -9,7 +9,7 @@ export async function GET() {
     );
   
    const response = await fetch(
-    `https://parseapi.back4app.com/classes/University?limit=10&order=name,state&where=${where}`,
+    `https://parseapi.back4app.com/classes/University?limit=3203&order=name,state&where=${where}`,
     {
       headers: {
         'X-Parse-Application-Id': 'Ipq7xXxHYGxtAtrDgCvG0hrzriHKdOsnnapEgcbe', // This is the fake app's application id
